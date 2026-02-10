@@ -7,13 +7,15 @@ use App\Http\Controllers\Siswa\AkunController;
 use App\Http\Controllers\Siswa\DashboardController;
 use App\Http\Controllers\Siswa\LaporanPengaduanController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\AkunController as AdminAkunController;
+use App\Http\Controllers\Admin\KategoriController;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
 Route::prefix('siswa')->name('siswa.')->group(function () {
-
     Route::middleware('guest:siswa')->group(function () {
         Route::get('/login', [AuthController::class, 'showLogin'])
             ->name('login');
@@ -23,7 +25,6 @@ Route::prefix('siswa')->name('siswa.')->group(function () {
             ->name('register');
         Route::post('/register', [RegisterController::class, 'register']);
     });
-
     Route::middleware('auth:siswa')->group(function () {
         Route::view('/dashboard', 'siswa.dashboard')->name('dashboard');
         Route::post('/logout', [AuthController::class, 'logout'])
@@ -44,18 +45,22 @@ Route::prefix('siswa')->name('siswa.')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-
     Route::middleware('guest:admin')->group(function () {
         Route::get('login', [AdminAuthController::class, 'showLogin'])
             ->name('login');
-
         Route::post('login', [AdminAuthController::class, 'login']);
     });
-
     Route::middleware('auth:admin')->group(function () {
         Route::view('dashboard', 'admin.dashboard')->name('dashboard');
-
         Route::post('logout', [AdminAuthController::class, 'logout'])
             ->name('logout');
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+        Route::get('/akun', [AdminAkunController::class, 'index'])
+            ->name('akun');
+        Route::post('/akun', [AdminAkunController::class, 'updateProfile']);
+        Route::post('/akun/password', [AdminAkunController::class, 'updatePassword'])
+            ->name('akun.password');
+        Route::resource('kategori', KategoriController::class);
     });
 });
