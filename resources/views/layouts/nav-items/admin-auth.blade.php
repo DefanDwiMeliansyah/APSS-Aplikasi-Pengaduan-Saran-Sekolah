@@ -6,6 +6,12 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.laporan.index') }}">
+        Laporan & Aspirasi
+    </a>
+</li>
+
+<li class="nav-item">
     <a href="{{ route('admin.kategori.index') }}" class="nav-link">
         Kategori
     </a>

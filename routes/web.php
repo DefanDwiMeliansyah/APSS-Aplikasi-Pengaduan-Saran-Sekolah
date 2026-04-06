@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AkunController as AdminAkunController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\LaporanAspirasiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,5 +63,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/akun/password', [AdminAkunController::class, 'updatePassword'])
             ->name('akun.password');
         Route::resource('kategori', KategoriController::class);
+        Route::resource('laporan', LaporanAspirasiController::class)
+            ->only('index', 'show', 'update');
     });
 });
