@@ -1,33 +1,28 @@
-<div class="mb-4">
-    <div class="text-muted small">Tanggapan</div>
+<div class="detail-item">
+    <div class="detail-item__label">Tanggapan</div>
 
     @if ($laporan->aspirasi?->status === 'selesai')
-        <span class="badge bg-success">
-            <i class="bi bi-check-circle"></i>
-            {{ ucwords($laporan->aspirasi?->status) }}
+        <span class="badge-s badge-s--selesai">
+            <i class="bi bi-check-circle"></i> Selesai
         </span>
     @elseif ($laporan->aspirasi?->status === 'proses')
-        <span class="badge bg-warning">
-            <i class="bi bi-hourglass-split"></i>
-            {{ ucwords($laporan->aspirasi?->status) }}
+        <span class="badge-s badge-s--proses">
+            <i class="bi bi-hourglass-split"></i> Diproses
         </span>
     @else
-        <span class="badge bg-primary">
-            <i class="bi bi-hourglass-split"></i>
-            Menunggu
+        <span class="badge-s badge-s--menunggu">
+            <i class="bi bi-clock"></i> Menunggu
         </span>
     @endif
 
     {{-- Tombol Hapus --}}
     <form action="{{ route('siswa.laporan.destroy', $laporan->id) }}"
-        method="POST" class="d-inline ms-3"
-        onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+          method="POST" style="display:inline;margin-left:.75rem;"
+          onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
         @csrf
         @method('DELETE')
-
-        <button class="btn btn-link text-danger p-0 align-baseline">
-            <i class="bi bi-trash"></i>
-            Hapus Laporan ini
+        <button type="submit" class="btn-sm-s btn-sm-s--danger" style="border:none;">
+            <i class="bi bi-trash"></i> Hapus Laporan
         </button>
     </form>
 </div>

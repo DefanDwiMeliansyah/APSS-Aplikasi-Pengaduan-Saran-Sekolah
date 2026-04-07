@@ -1,64 +1,36 @@
-<div class="mb-4">
-    <div class="text-muted small mb-2">Feedback Kepuasan</div>
+<div class="detail-item">
+    <div class="detail-item__label">Feedback Kepuasan</div>
 
     @if ($laporan->aspirasi->feedback)
-    {{-- SUDAH MEMBERI FEEDBACK --}}
-    <div class="alert alert-success mb-0">
-        Feedback telah diberikan:
-        <strong>
-            {{
-                    [
-                        1 => 'Tidak Puas',
-                        2 => 'Kurang Puas',
-                        3 => 'Cukup Puas',
-                        4 => 'Puas',
-                        5 => 'Sangat Puas',
-                    ][$laporan->aspirasi->feedback] ?? '-'
-                }}
-        </strong>
-    </div>
+        {{-- Sudah memberi feedback --}}
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:.75rem 1rem;font-size:.875rem;color:#166534;display:flex;align-items:center;gap:.5rem;">
+            <i class="bi bi-check-circle"></i>
+            Feedback kamu:
+            <strong>
+                {{ [1=>'Tidak Puas',2=>'Kurang Puas',3=>'Cukup Puas',4=>'Puas',5=>'Sangat Puas'][$laporan->aspirasi->feedback] ?? '-' }}
+            </strong>
+        </div>
     @else
-    {{-- BELUM MEMBERI FEEDBACK --}}
-    <form action="{{ route('siswa.laporan.feedback', $laporan->aspirasi->id) }}"
-        method="POST">
-        @csrf
+        {{-- Belum memberi feedback --}}
+        <form action="{{ route('siswa.laporan.feedback', $laporan->aspirasi->id) }}" method="POST">
+            @csrf
 
-        <div class="d-flex flex-column gap-2">
-            <label class="d-flex align-items-center gap-2">
-                <input type="radio" name="feedback" value="1">
-                <span>Tidak Puas</span>
-            </label>
+            <div class="feedback-options" style="margin-bottom:1rem;">
+                @foreach([1=>'Tidak Puas',2=>'Kurang Puas',3=>'Cukup Puas',4=>'Puas',5=>'Sangat Puas'] as $val => $text)
+                <label class="feedback-option">
+                    <input type="radio" name="feedback" value="{{ $val }}">
+                    <span>{{ $text }}</span>
+                </label>
+                @endforeach
+            </div>
 
-            <label class="d-flex align-items-center gap-2">
-                <input type="radio" name="feedback" value="2">
-                <span>Kurang Puas</span>
-            </label>
+            @error('feedback')
+            <div style="font-size:.78rem;color:#dc2626;margin-bottom:.75rem;">{{ $message }}</div>
+            @enderror
 
-            <label class="d-flex align-items-center gap-2">
-                <input type="radio" name="feedback" value="3">
-                <span>Cukup Puas</span>
-            </label>
-
-            <label class="d-flex align-items-center gap-2">
-                <input type="radio" name="feedback" value="4">
-                <span>Puas</span>
-            </label>
-
-            <label class="d-flex align-items-center gap-2">
-                <input type="radio" name="feedback" value="5">
-                <span>Sangat Puas</span>
-            </label>
-        </div>
-
-        @error('feedback')
-        <div class="text-danger small mt-2">
-            {{ $message }}
-        </div>
-        @enderror
-
-        <button class="btn btn-primary btn-sm mt-3">
-            Kirim Feedback
-        </button>
-    </form>
+            <button type="submit" class="btn-primary-s">
+                <i class="bi bi-send"></i> Kirim Feedback
+            </button>
+        </form>
     @endif
 </div>

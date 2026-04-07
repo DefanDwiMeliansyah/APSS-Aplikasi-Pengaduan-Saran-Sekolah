@@ -1,49 +1,45 @@
 @extends('layouts.siswa')
-
-@section('title', 'Akun Saya')
+@section('title', 'Profil Saya')
 
 @section('content')
-    <h1 class="mt-3">Akun Saya</h1>
-    <hr>
-    <div class="row">
-        <div class="col-md-5">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    {{-- Alert Success --}}
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert">
-                            </button>
-                        </div>
-                    @endif
 
-                    <form action="{{ route('siswa.akun.update') }}" method="POST">
-                        @csrf
-                        @method('PUT')
+@if (session('success'))
+    <div class="alert-success-s">
+        <i class="bi bi-check-circle"></i> {{ session('success') }}
+    </div>
+@endif
 
-                        {{-- NIS --}}
-                        <label class="form-label">NIS</label>
-                        <x-input name="nis" :value="$siswa->nis" />
+<div style="max-width:480px;">
+    <div class="page-card">
+        <div class="page-card__header">
+            <h1 class="page-card__title">Profil Saya</h1>
+        </div>
+        <div class="page-card__body">
+            <form action="{{ route('siswa.akun.update') }}" method="POST">
+                @csrf
+                @method('PUT')
 
-                        {{-- Nama --}}
-                        <label class="form-label">Nama Lengkap</label>
-                        <x-input name="nama" :value="$siswa->nama" />
-
-                        {{-- Kelas --}}
-                        <label class="form-label">Kelas</label>
-                        <x-input name="kelas" :value="$siswa->kelas" />
-
-                        <div class="d-grid">
-                            <button class="btn btn-primary">
-                                <i class="bi bi-database"></i>
-                                Update
-                            </button>
-                        </div>
-
-                    </form>
+                <div style="margin-bottom:1rem;">
+                    <label class="siswa-label">NIS</label>
+                    <x-input name="nis" :value="$siswa->nis" />
                 </div>
-            </div>
+
+                <div style="margin-bottom:1rem;">
+                    <label class="siswa-label">Nama Lengkap</label>
+                    <x-input name="nama" :value="$siswa->nama" />
+                </div>
+
+                <div style="margin-bottom:1.5rem;">
+                    <label class="siswa-label">Kelas</label>
+                    <x-input name="kelas" :value="$siswa->kelas" />
+                </div>
+
+                <button type="submit" class="btn-primary-s">
+                    <i class="bi bi-save"></i> Simpan Perubahan
+                </button>
+            </form>
         </div>
     </div>
+</div>
+
 @endsection

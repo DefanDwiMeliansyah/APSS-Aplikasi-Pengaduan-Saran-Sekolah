@@ -1,57 +1,60 @@
 @extends('layouts.siswa')
-
-@section('title', 'Laporan Pengaduan')
+@section('title', 'Detail Laporan')
 
 @section('content')
-<div class="card mt-3">
-    <div class="card-header">
-        <h5 class="card-title mb-0">
-            Laporan Pengaduan
-        </h5>
+<div class="page-card">
+    <div class="page-card__header">
+        <h1 class="page-card__title">Detail Laporan</h1>
+
+        {{-- Status badge --}}
+        @php
+            $st  = $laporan->aspirasi?->status ?? 'menunggu';
+            $cls = match($st) {
+                'selesai' => 'badge-s--selesai',
+                'proses'  => 'badge-s--proses',
+                default   => 'badge-s--menunggu',
+            };
+            $label = match($st) { 'selesai' => 'Selesai', 'proses' => 'Diproses', default => 'Menunggu' };
+        @endphp
+        <span class="badge-s {{ $cls }}">{{ $label }}</span>
     </div>
 
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-8">
+    <div class="page-card__body">
+        <div class="row" style="display:flex;flex-wrap:wrap;gap:1.5rem;">
 
-                {{-- Kategori --}}
-                <div class="mb-4">
-                    <div class="text-muted small">Kategori</div>
-                    <div class="fw-semibold">
-                        {{ $laporan->kategori->nama_kategori ?? '-' }}
-                    </div>
+            {{-- Info laporan --}}
+            <div style="flex:1;min-width:260px;">
+                <div class="detail-item">
+                    <div class="detail-item__label">Kategori</div>
+                    <div class="detail-item__value">{{ $laporan->kategori->nama_kategori ?? '-' }}</div>
                 </div>
-
-                {{-- Lokasi --}}
-                <div class="mb-4">
-                    <div class="text-muted small">Lokasi Kejadian</div>
-                    <div class="fw-semibold">
-                        {{ $laporan->lokasi }}
-                    </div>
+                <div class="detail-item">
+                    <div class="detail-item__label">Lokasi Kejadian</div>
+                    <div class="detail-item__value">{{ $laporan->lokasi }}</div>
                 </div>
-
-                {{-- Keterangan --}}
-                <div class="mb-4">
-                    <div class="text-muted small">Keterangan</div>
-                    <div>
-                        {{ $laporan->ket }}
-                    </div>
+                <div class="detail-item">
+                    <div class="detail-item__label">Keterangan</div>
+                    <div class="detail-item__value">{{ $laporan->ket }}</div>
                 </div>
-
-                {{-- Tanggapan Admin --}}
-                @include('siswa.laporan.tanggapan')
-
-                {{-- Feedback --}}
-                @if ($laporan->aspirasi?->status === 'selesai')
-                @include('siswa.laporan.feedback')
-                @endif
-
-                <a href="{{ route('siswa.dashboard') }}" class="btn btn-secondary">
-                    <i class="bi bi-arrow-left"></i>
-                    Kembali
-                </a>
-
+                <div class="detail-item">
+                    <div class="detail-item__label">Tanggal Laporan</div>
+                    <div class="detail-item__value">{{ $laporan->created_at->format('d M Y') }}</div>
+                </div>
             </div>
+
+            {{-- Status & aksi --}}
+            <div style="flex:1;min-width:220px;">
+                @include('siswa.laporan.tanggapan')
+                @if ($laporan->aspirasi?->status === 'selesai')
+                    @include('siswa.laporan.feedback')
+                @endif
+            </div>
+        </div>
+
+        <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--gray-100);">
+            <a href="{{ route('siswa.dashboard') }}" class="btn-secondary-s">
+                <i class="bi bi-arrow-left"></i> Kembali
+            </a>
         </div>
     </div>
 </div>

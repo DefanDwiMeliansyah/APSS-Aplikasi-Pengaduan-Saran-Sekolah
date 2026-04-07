@@ -22,7 +22,7 @@
     <div class="col-6 col-lg-3">
         <div class="stat-card">
             <div class="stat-card__icon stat-card__icon--blue">
-                <i class="bi bi-clipboard-list"></i>
+                <i class="bi bi-card-checklist"></i>
             </div>
             <div>
                 <div class="stat-card__value">{{ $totalLaporan ?? 0 }}</div>

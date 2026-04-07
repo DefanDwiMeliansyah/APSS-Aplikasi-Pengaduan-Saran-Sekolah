@@ -1,28 +1,28 @@
 @extends('layouts.siswa')
 
 @section('content')
-<div class="card mt-3">
-    <div class="card-body card-body d-flex justify-content-between align-item-center">
-        <h5>Selamat datang {{ auth()->user()->nama }}</h5>
-        <a href="{{ route('siswa.laporan.create') }}" class="btn btn-primary btn-sm">
+
+@if (session('success'))
+    <div class="alert-success-s">
+        <i class="bi bi-check-circle"></i> {{ session('success') }}
+    </div>
+@endif
+
+<div class="page-card">
+    <div class="page-card__header">
+        <h1 class="page-card__title">Laporan Saya</h1>
+        <a href="{{ route('siswa.laporan.create') }}" class="btn-primary-s">
             <i class="bi bi-plus-circle"></i> Buat Pengaduan
         </a>
     </div>
 
-    @if (session('success'))
-    <div class="card-body">
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    </div>
-    @endif
-
-    <div class="card-body p-0 table-responsive">
+    <div class="page-card__body--flush" style="overflow-x:auto;">
         @include('siswa.partials.list-dashboard')
     </div>
-    <div class="card-footer pb-0">
+
+    <div class="page-card__footer">
         {{ $laporan->links() }}
     </div>
 </div>
+
 @endsection
