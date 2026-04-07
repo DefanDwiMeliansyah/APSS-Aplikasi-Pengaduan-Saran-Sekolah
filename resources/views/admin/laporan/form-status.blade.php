@@ -16,6 +16,23 @@
                 </select>
             </div>
 
+            <div style="margin-bottom:1.25rem;">
+                <label class="admin-label">
+                    Pesan untuk Siswa
+                    <span style="font-weight:400;color:var(--gray-400);">(opsional, maks. 500 karakter)</span>
+                </label>
+                <textarea
+                    name="pesan"
+                    class="admin-input"
+                    rows="4"
+                    placeholder="Tulis pesan atau keterangan untuk siswa..."
+                    style="resize:vertical;"
+                    maxlength="500">{{ $laporan->aspirasi?->pesan }}</textarea>
+                @error('pesan')
+                    <div style="font-size:.78rem;color:#dc2626;margin-top:.3rem;">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn-teal" style="width:100%;justify-content:center;">
                 <i class="bi bi-save"></i> Simpan Perubahan
             </button>

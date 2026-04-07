@@ -34,6 +34,14 @@
             </tr>
             @endforeach
             <tr>
+                <td style="width:140px;padding:.65rem 0;color:var(--gray-400);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:top;border-bottom:1px solid var(--gray-100);">
+                    Pesan Admin
+                </td>
+                <td style="padding:.65rem 0 .65rem 1rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100);">
+                    {{ $laporan->aspirasi?->pesan ?: '-' }}
+                </td>
+            </tr>
+            <tr>
                 <td style="width:140px;padding:.65rem 0;color:var(--gray-400);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:top;">
                     Feedback
                 </td>

@@ -14,6 +14,7 @@ class Aspirasi extends Model
         'laporan_id',
         'admin_id',
         'status',
+        'pesan',
         'feedback',
     ];
 

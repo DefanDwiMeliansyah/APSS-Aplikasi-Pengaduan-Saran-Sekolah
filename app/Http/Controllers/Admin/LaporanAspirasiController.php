@@ -112,6 +112,7 @@ class LaporanAspirasiController extends Controller
     {
         $request->validate([
             'status' => 'required|in:proses,selesai',
+            'pesan'  => 'nullable|string|max:500',
         ]);
 
         Aspirasi::updateOrCreate(
@@ -120,7 +121,8 @@ class LaporanAspirasiController extends Controller
             ],
             [
                 'admin_id' => Auth::guard('admin')->id(),
-                'status' => $request->status,
+                'status'   => $request->status,
+                'pesan'    => $request->pesan,
             ]
         );
 
