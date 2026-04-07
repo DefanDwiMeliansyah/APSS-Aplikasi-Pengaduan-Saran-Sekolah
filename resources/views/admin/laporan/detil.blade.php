@@ -1,48 +1,44 @@
-<div class="card mb-3">
-    <div class="card-body">
-        <table class="table table-borderless">
+<div class="panel-card">
+    <div class="panel-card__header">
+        <h2 class="panel-card__title">Informasi Laporan</h2>
+        @php
+            $st  = $laporan->aspirasi?->status ?? 'belum';
+            $cls = match($st) {
+                'selesai' => 'badge-status--selesai',
+                'proses'  => 'badge-status--proses',
+                default   => 'badge-status--belum',
+            };
+        @endphp
+        <span class="badge-status {{ $cls }}">{{ ucfirst($st) }}</span>
+    </div>
+    <div class="panel-card__body">
+        <table style="width:100%;border-collapse:collapse;font-size:.875rem;">
+            @php
+                $rows = [
+                    ['label' => 'Nama Siswa', 'value' => $laporan->siswa->nama],
+                    ['label' => 'NIS',        'value' => $laporan->siswa->nis],
+                    ['label' => 'Kelas',      'value' => $laporan->siswa->kelas],
+                    ['label' => 'Kategori',   'value' => $laporan->kategori->nama_kategori],
+                    ['label' => 'Lokasi',     'value' => $laporan->lokasi],
+                    ['label' => 'Laporan',    'value' => $laporan->ket],
+                ];
+            @endphp
+            @foreach ($rows as $row)
             <tr>
-                <th width="200">Nama Siswa</th>
-                <td>{{ $laporan->siswa->nama }}</td>
-            </tr>
-            <tr>
-                <th width="200">NIS</th>
-                <td>{{ $laporan->siswa->nis }}</td>
-            </tr>
-            <tr>
-                <th width="200">Kelas</th>
-                <td>{{ $laporan->siswa->kelas }}</td>
-            </tr>
-            <tr>
-                <th>Kategori</th>
-                <td>{{ $laporan->kategori->nama_kategori }}</td>
-            </tr>
-            <tr>
-                <th>Laporan</th>
-                <td>{{ $laporan->ket }}</td>
-            </tr>
-            <tr>
-                <th>Lokasi</th>
-                <td>{{ $laporan->lokasi }}</td>
-            </tr>
-            <tr>
-                <th>Status Saat Ini</th>
-                <td>
-                    @if ($laporan->aspirasi?->status === 'selesai')
-                    <span class="badge bg-success">Selesai</span>
-                    @elseif ($laporan->aspirasi?->status === 'proses')
-                    <span class="badge bg-warning">Proses</span>
-                    @else
-                    <span class="badge bg-secondary">Belum Diproses</span>
-                    @endif
+                <td style="width:140px;padding:.65rem 0;color:var(--gray-400);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:top;border-bottom:1px solid var(--gray-100);">
+                    {{ $row['label'] }}
+                </td>
+                <td style="padding:.65rem 0 .65rem 1rem;color:var(--gray-700);border-bottom:1px solid var(--gray-100);">
+                    {{ $row['value'] }}
                 </td>
             </tr>
+            @endforeach
             <tr>
-                <th>Feedback Kepuasan</th>
-                <td>
-                    <span class="badge bg-info">
-                        {{ $laporan->feedback }}
-                    </span>
+                <td style="width:140px;padding:.65rem 0;color:var(--gray-400);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:top;">
+                    Feedback
+                </td>
+                <td style="padding:.65rem 0 .65rem 1rem;color:var(--gray-700);">
+                    {{ $laporan->feedback ?: '-' }}
                 </td>
             </tr>
         </table>

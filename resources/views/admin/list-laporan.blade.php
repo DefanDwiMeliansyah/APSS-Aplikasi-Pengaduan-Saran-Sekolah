@@ -1,10 +1,13 @@
-<div class="card shadow-sm">
-    <div class="card-header bg-white">
-        <strong>Laporan Terbaru</strong>
+<div class="panel-card">
+    <div class="panel-card__header">
+        <h2 class="panel-card__title">Laporan Terbaru</h2>
+        <a href="{{ route('admin.laporan.index') }}" class="btn-sm-action btn-sm-action--primary">
+            Lihat Semua <i class="bi bi-arrow-right"></i>
+        </a>
     </div>
-    <div class="card-body p-0">
-        <table class="table table-hover mb-0">
-            <thead class="table-light">
+    <div class="panel-card__body--flush">
+        <table class="admin-table">
+            <thead>
                 <tr>
                     <th>#</th>
                     <th>Siswa</th>
@@ -13,28 +16,30 @@
                     <th>Tanggal</th>
                 </tr>
             </thead>
-
             <tbody>
                 @forelse ($laporanTerbaru ?? [] as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->siswa->nama ?? '-' }}</td>
+                        <td style="color:var(--gray-400);font-size:.8rem;">{{ $loop->iteration }}</td>
+                        <td style="font-weight:500;">{{ $item->siswa->nama ?? '-' }}</td>
                         <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
                         <td>
                             @php
-                                $badge = $item->aspirasi?->status === 'selesai'
-                                    ? 'success'
-                                    : 'danger';
+                                $st = $item->aspirasi?->status ?? 'belum';
+                                $cls = match($st) {
+                                    'selesai' => 'badge-status--selesai',
+                                    'proses'  => 'badge-status--proses',
+                                    default   => 'badge-status--belum',
+                                };
                             @endphp
-                            <span class="badge bg-{{ $badge }}">
-                                {{ ucfirst($item->aspirasi?->status ?? 'baru') }}
-                            </span>
+                            <span class="badge-status {{ $cls }}">{{ ucfirst($st) }}</span>
                         </td>
-                        <td>{{ $item->created_at->format('d M Y') }}</td>
+                        <td style="color:var(--gray-400);font-size:.82rem;">
+                            {{ $item->created_at->format('d M Y') }}
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center text-muted py-3">
+                        <td colspan="5" style="text-align:center;padding:2rem;color:var(--gray-400);">
                             Belum ada laporan
                         </td>
                     </tr>

@@ -1,22 +1,25 @@
 @extends('layouts.admin')
-@section('title', 'Laporan Aspirasi')
+@section('title', 'Detail Laporan')
+@section('page-title', 'Detail Laporan')
+
 @section('content')
-<h4 class="mb-4 mt-3">Laporan Aspirasi</h4>
+
 @if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
+    <div class="alert-success-inline">
+        <i class="bi bi-check-circle"></i> {{ session('success') }}
+    </div>
 @endif
 
-<div class="row">
-    <!-- Detail laporan -->
-    <div class="col-md-8">
+<div class="row g-3">
+    {{-- Detail --}}
+    <div class="col-lg-8">
         @include('admin.laporan.detil')
     </div>
 
-    <!-- Form update status -->
-    <div class="col-md-4">
+    {{-- Update status --}}
+    <div class="col-lg-4">
         @include('admin.laporan.form-status')
     </div>
 </div>
+
 @endsection

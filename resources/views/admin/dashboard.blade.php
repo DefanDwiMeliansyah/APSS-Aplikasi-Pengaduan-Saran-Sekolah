@@ -1,43 +1,62 @@
 @extends('layouts.admin')
 
+@section('title', 'Dashboard')
+@section('page-title', 'Dashboard')
+
 @section('content')
-    <div class="row g-3 mb-4 mt-3">
-        <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="text-muted small">Total Siswa</div>
-                    <h3>{{ $totalSiswa ?? 0 }}</h3>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="text-muted small">Total Laporan</div>
-                    <h3>{{ $totalLaporan ?? 0 }}</h3>
-                </div>
+{{-- Stat Cards --}}
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--teal">
+                <i class="bi bi-people"></i>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="text-muted small">Laporan Diproses</div>
-                    <h3>{{ $laporanProses ?? 0 }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="text-muted small">Laporan Selesai</div>
-                    <h3>{{ $laporanSelesai ?? 0 }}</h3>
-                </div>
+            <div>
+                <div class="stat-card__value">{{ $totalSiswa ?? 0 }}</div>
+                <div class="stat-card__label">Total Siswa</div>
             </div>
         </div>
     </div>
 
-    @include('admin.list-laporan')
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--blue">
+                <i class="bi bi-clipboard-list"></i>
+            </div>
+            <div>
+                <div class="stat-card__value">{{ $totalLaporan ?? 0 }}</div>
+                <div class="stat-card__label">Total Laporan</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--amber">
+                <i class="bi bi-hourglass-split"></i>
+            </div>
+            <div>
+                <div class="stat-card__value">{{ $laporanProses ?? 0 }}</div>
+                <div class="stat-card__label">Diproses</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--green">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <div>
+                <div class="stat-card__value">{{ $laporanSelesai ?? 0 }}</div>
+                <div class="stat-card__label">Selesai</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Tabel laporan terbaru --}}
+@include('admin.list-laporan')
+
 @endsection

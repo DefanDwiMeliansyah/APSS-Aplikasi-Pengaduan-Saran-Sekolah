@@ -1,54 +1,70 @@
 @extends('layouts.admin')
 @section('title', 'Kategori')
+@section('page-title', 'Kategori')
+
 @section('content')
-<h4 class="mb-3 mt-3">Kategori</h4>
 
-<div class="card mb-3">
-    <div class="card-body">
-        <a href="{{ route('admin.kategori.create') }}" class="btn btn-primary mb-3">
-            + Tambah Kategori
-        </a>
-
-        @if (session('success'))
-        <div class="alert alert-success mt-3">{{ session('success') }}</div>
-        @endif
+@if (session('success'))
+    <div class="alert-success-inline">
+        <i class="bi bi-check-circle"></i> {{ session('success') }}
     </div>
-    <div class="card-body p-0">
-        <table class="table table-striped mb-0">
+@endif
+
+<div class="panel-card">
+    <div class="panel-card__header">
+        <h2 class="panel-card__title">Daftar Kategori</h2>
+        <a href="{{ route('admin.kategori.create') }}" class="btn-teal">
+            <i class="bi bi-plus"></i> Tambah Kategori
+        </a>
+    </div>
+
+    <div class="panel-card__body--flush">
+        <table class="admin-table">
             <thead>
                 <tr>
-                    <th width="50">No</th>
+                    <th style="width:60px;">No</th>
                     <th>Nama Kategori</th>
-                    <th width="150">Aksi</th>
+                    <th style="width:160px;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($kategori as $item)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama_kategori }}</td>
+                    <td style="color:var(--gray-400);font-size:.8rem;">{{ $loop->iteration }}</td>
+                    <td style="font-weight:500;">{{ $item->nama_kategori }}</td>
                     <td>
-                        <a href="{{ route('admin.kategori.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-
-                        <form action="{{ route('admin.kategori.destroy', $item->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" onclick="return confirm('Hapus kategori ini?')">
-                                Hapus
-                            </button>
-                        </form>
+                        <div style="display:flex;gap:.375rem;">
+                            <a href="{{ route('admin.kategori.edit', $item->id) }}"
+                               class="btn-sm-action btn-sm-action--warning">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                            <form action="{{ route('admin.kategori.destroy', $item->id) }}"
+                                  method="POST" style="display:inline;"
+                                  onsubmit="return confirm('Hapus kategori ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-sm-action btn-sm-action--danger">
+                                    <i class="bi bi-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">Data Kosong</td>
+                    <td colspan="3"
+                        style="text-align:center;padding:2.5rem;color:var(--gray-400);">
+                        Belum ada kategori
+                    </td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-    <div class="card-footer pb-0">
+
+    <div class="panel-card__footer">
         {{ $kategori->links() }}
     </div>
 </div>
+
 @endsection

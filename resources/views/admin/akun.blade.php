@@ -1,59 +1,69 @@
 @extends('layouts.admin')
-
-@section('title', 'Akun Saya')
+@section('title', 'Pengaturan Akun')
+@section('page-title', 'Pengaturan Akun')
 
 @section('content')
-<h1 class="mt-3">Pengaturan Akun</h1>
-<hr>
 
-<div class="row mb-3">
+@if (session('success'))
+    <div class="alert-success-inline">
+        <i class="bi bi-check-circle"></i> {{ session('success') }}
+    </div>
+@endif
+
+<div class="row g-3">
+    {{-- Profil --}}
     <div class="col-md-5">
-
-        {{-- Alert --}}
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="panel-card">
+            <div class="panel-card__header">
+                <h2 class="panel-card__title">Profil Admin</h2>
             </div>
-        @endif
-
-        {{-- PROFIL --}}
-        <div class="card shadow-sm mb-4">
-            <div class="card-header">
-                <h6 class="mb-0">Pengaturan Profil Admin</h6>
+            <div class="panel-card__body">
+                <form method="POST" action="{{ route('admin.akun') }}">
+                    @csrf
+                    <div style="margin-bottom:1rem;">
+                        <label class="admin-label">Nama</label>
+                        <x-input name="nama" placeholder="Nama" :value="$admin->nama" />
+                    </div>
+                    <div style="margin-bottom:1.25rem;">
+                        <label class="admin-label">Username</label>
+                        <x-input name="username" placeholder="Username" :value="$admin->username" />
+                    </div>
+                    <button type="submit" class="btn-teal">
+                        <i class="bi bi-save"></i> Simpan Perubahan
+                    </button>
+                </form>
             </div>
-            <form class="card-body" method="POST" action="{{ route('admin.akun') }}">
-                @csrf
-                <x-input name="nama" placeholder="Nama" :value="$admin->nama" />
-                <x-input name="username" placeholder="Username" :value="$admin->username" />
-
-                <button class="btn btn-primary">
-                    <i class="bi bi-database"></i> Update
-                </button>
-            </form>
         </div>
+    </div>
 
-        {{-- PASSWORD --}}
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <h6 class="mb-0">Ganti Password</h6>
+    {{-- Password --}}
+    <div class="col-md-5">
+        <div class="panel-card">
+            <div class="panel-card__header">
+                <h2 class="panel-card__title">Ganti Password</h2>
             </div>
-            <form class="card-body" method="POST"
-                action="{{ route('admin.akun.password') }}">
-                @csrf
-                <x-input type="password" name="password_lama"
-                    placeholder="Password Lama" />
-                <x-input type="password" name="password_baru"
-                    placeholder="Password Baru" />
-                <x-input type="password" name="password_baru_confirmation"
-                    placeholder="Konfirmasi Password Baru" />
-
-                <button class="btn btn-warning">
-                    <i class="bi bi-key"></i> Ganti Password
-                </button>
-            </form>
+            <div class="panel-card__body">
+                <form method="POST" action="{{ route('admin.akun.password') }}">
+                    @csrf
+                    <div style="margin-bottom:1rem;">
+                        <label class="admin-label">Password Lama</label>
+                        <x-input type="password" name="password_lama" placeholder="Password Lama" />
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label class="admin-label">Password Baru</label>
+                        <x-input type="password" name="password_baru" placeholder="Password Baru" />
+                    </div>
+                    <div style="margin-bottom:1.25rem;">
+                        <label class="admin-label">Konfirmasi Password Baru</label>
+                        <x-input type="password" name="password_baru_confirmation" placeholder="Konfirmasi Password Baru" />
+                    </div>
+                    <button type="submit" class="btn-outline-gray">
+                        <i class="bi bi-key"></i> Ganti Password
+                    </button>
+                </form>
+            </div>
         </div>
-
     </div>
 </div>
+
 @endsection

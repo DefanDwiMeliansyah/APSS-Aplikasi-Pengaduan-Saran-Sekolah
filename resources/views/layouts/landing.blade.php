@@ -70,7 +70,7 @@
 @endpush
 
 @section('body')
-    @include('landing._navbar')
+    @include('landing.navbar')
     @yield('content')
-    @include('landing._footer')
+    @include('landing.footer')
 @endsection
