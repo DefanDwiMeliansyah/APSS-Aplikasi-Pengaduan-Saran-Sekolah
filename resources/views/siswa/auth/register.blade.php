@@ -1,79 +1,105 @@
 @extends('layouts.auth')
-@section('title', 'Register')
+@section('title', 'Daftar Siswa')
 
-@section('content')
-<div class="card shadow-sm" style="width: 400px">
-    <div class="card-header text-center">
-        <h5 class="card-title mb-0">Registrasi Siswa</h5>
+{{-- Panel kiri --}}
+@section('auth-left')
+<div class="auth-panel-left">
+    <div class="auth-panel-left__brand">APSS</div>
+
+    <div>
+        <p class="auth-panel-left__quote">
+            Bergabung dan<br>jadikan sekolah<br>lebih baik.
+        </p>
+        <p class="auth-panel-left__sub">
+            Daftarkan dirimu dalam hitungan detik dan
+            mulai berkontribusi untuk perbaikan fasilitas sekolah.
+        </p>
     </div>
 
-    <form class="card-body" method="POST" action="{{ route('siswa.register') }}">
-        @csrf
-
-        {{-- NIS --}}
-        <div class="mb-3">
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-person"></i>
-                </span>
-                <input type="text" name="nis"
-                    class="form-control @error('nis') is-invalid @enderror"
-                    placeholder="NIS"
-                    value="{{ old('nis', $nis) }}">
-            </div>
-            @error('nis')
-                <div class="invalid-feedback d-block">
-                    {{ $message }}
-                </div>
-            @enderror
+    <div class="auth-panel-left__badges">
+        <div class="auth-badge">
+            <i class="bi bi-pencil-square"></i>
+            <span>Lapor masalah fasilitas dengan mudah</span>
         </div>
-
-        {{-- Nama --}}
-        <div class="mb-3">
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-card-text"></i>
-                </span>
-                <input type="text" name="nama"
-                    class="form-control @error('nama') is-invalid @enderror"
-                    placeholder="Nama Lengkap"
-                    value="{{ old('nama') }}">
-            </div>
-            @error('nama')
-                <div class="invalid-feedback d-block">
-                    {{ $message }}
-                </div>
-            @enderror
+        <div class="auth-badge">
+            <i class="bi bi-chat-left-dots"></i>
+            <span>Terima tanggapan langsung dari admin</span>
         </div>
-
-        {{-- Kelas --}}
-        <div class="mb-3">
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="bi bi-mortarboard"></i>
-                </span>
-                <input type="text" name="kelas"
-                    class="form-control @error('kelas') is-invalid @enderror"
-                    placeholder="Kelas (contoh: X PPLG 2)"
-                    value="{{ old('kelas') }}">
-            </div>
-            @error('kelas')
-                <div class="invalid-feedback d-block">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <div class="d-grid mb-2">
-            <button type="submit" class="btn btn-primary">
-                Daftar
-            </button>
-        </div>
-
-        <p class="text-center mb-0">
-            Sudah punya akun?
-            <a href="{{ route('siswa.login') }}">Login</a>
-        </p>
-    </form>
+    </div>
 </div>
+@endsection
+
+{{-- Form --}}
+@section('content')
+<h1 class="auth-form-box__title">Buat Akun</h1>
+<p class="auth-form-box__subtitle">Isi data diri kamu untuk mendaftar sebagai siswa.</p>
+
+<form method="POST" action="{{ route('siswa.register') }}">
+    @csrf
+
+    {{-- NIS --}}
+    <div class="auth-field">
+        <label for="nis">NIS (Nomor Induk Siswa)</label>
+        <div class="field-wrap">
+            <i class="bi bi-person field-icon"></i>
+            <input
+                type="text"
+                id="nis"
+                name="nis"
+                placeholder="Masukkan NIS kamu"
+                value="{{ old('nis', $nis ?? '') }}"
+                class="{{ $errors->has('nis') ? 'is-invalid' : '' }}"
+                autocomplete="off">
+        </div>
+        @error('nis')
+            <div class="field-error">{{ $message }}</div>
+        @enderror
+    </div>
+
+    {{-- Nama --}}
+    <div class="auth-field">
+        <label for="nama">Nama Lengkap</label>
+        <div class="field-wrap">
+            <i class="bi bi-card-text field-icon"></i>
+            <input
+                type="text"
+                id="nama"
+                name="nama"
+                placeholder="Tulis nama lengkap kamu"
+                value="{{ old('nama') }}"
+                class="{{ $errors->has('nama') ? 'is-invalid' : '' }}"
+                autocomplete="name">
+        </div>
+        @error('nama')
+            <div class="field-error">{{ $message }}</div>
+        @enderror
+    </div>
+
+    {{-- Kelas --}}
+    <div class="auth-field">
+        <label for="kelas">Kelas</label>
+        <div class="field-wrap">
+            <i class="bi bi-mortarboard field-icon"></i>
+            <input
+                type="text"
+                id="kelas"
+                name="kelas"
+                placeholder="Contoh: X PPLG 2"
+                value="{{ old('kelas') }}"
+                class="{{ $errors->has('kelas') ? 'is-invalid' : '' }}"
+                autocomplete="off">
+        </div>
+        @error('kelas')
+            <div class="field-error">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <button type="submit" class="auth-btn">
+        Buat Akun
+    </button>
+</form>
+
+<p class="auth-alt-link">
+    Sudah punya akun? <a href="{{ route('siswa.login') }}">Masuk di sini</a>
+</p>
 @endsection
