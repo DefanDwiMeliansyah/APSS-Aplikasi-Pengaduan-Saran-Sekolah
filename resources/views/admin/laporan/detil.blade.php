@@ -50,6 +50,30 @@
                     {{ $laporan->feedback ?: '-' }}
                 </td>
             </tr>
+            <tr>
+                <td style="width:140px;padding:.65rem 0;color:var(--gray-400);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:top;">
+                    Foto Pengaduan
+                </td>
+                <td style="padding:.65rem 0 .65rem 1rem;">
+                    @if($laporan->foto_pengaduan)
+                        <div style="margin-bottom:1rem;">
+                            <img src="{{ asset('storage/' . $laporan->foto_pengaduan) }}" alt="Foto Pengaduan" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:cover;">
+                        </div>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td style="width:140px;padding:.65rem 0;color:var(--gray-400);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;vertical-align:top;">
+                    Foto Balasan
+                </td>
+                <td colspan="2" style="padding-top:1rem;">
+                    @if($laporan->aspirasi?->foto_tanggapan)
+                        <div>
+                            <img src="{{ asset('storage/' . $laporan->aspirasi->foto_tanggapan) }}" alt="Foto Balasan Admin" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:cover;">
+                        </div>
+                    @endif
+                </td>
+            </tr>
         </table>
     </div>
 </div>

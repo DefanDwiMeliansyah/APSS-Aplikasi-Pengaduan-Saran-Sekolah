@@ -40,6 +40,15 @@
                     <div class="detail-item__label">Tanggal & Waktu Laporan</div>
                     <div class="detail-item__value">{{ $laporan->created_at->format('d M Y H:i') }} WIB</div>
                 </div>
+                
+                @if($laporan->foto_pengaduan)
+                <div class="detail-item">
+                    <div class="detail-item__label">Foto Pengaduan</div>
+                    <div class="detail-item__value">
+                        <img src="{{ asset('storage/' . $laporan->foto_pengaduan) }}" alt="Foto Pengaduan" style="max-width:100%; border-radius:8px; margin-top:0.5rem; max-height:300px; object-fit:cover;">
+                    </div>
+                </div>
+                @endif
             </div>
 
             {{-- Status & aksi --}}

@@ -15,6 +15,7 @@ class LaporanPengaduan extends Model
         'kategori_id',
         'ket',
         'lokasi',
+        'foto_pengaduan',
     ];
 
     public function siswa()

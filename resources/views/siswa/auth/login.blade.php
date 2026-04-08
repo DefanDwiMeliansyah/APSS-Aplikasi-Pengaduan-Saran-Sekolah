@@ -85,8 +85,4 @@
         Masuk
     </button>
 </form>
-
-<p class="auth-alt-link">
-    Belum punya akun? <a href="{{ route('siswa.register') }}">Daftar sekarang</a>
-</p>
 @endsection

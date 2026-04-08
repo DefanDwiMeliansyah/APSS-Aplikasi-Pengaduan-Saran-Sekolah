@@ -38,14 +38,21 @@ class LaporanPengaduanController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'ket' => 'required|string',
             'lokasi' => 'required|string|max:255',
+            'foto_pengaduan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        LaporanPengaduan::create([
+        $data = [
             'siswa_id' => Auth::guard('siswa')->user()->id,
             'kategori_id' => $request->kategori_id,
             'ket' => $request->ket,
             'lokasi' => $request->lokasi,
-        ]);
+        ];
+
+        if ($request->hasFile('foto_pengaduan')) {
+            $data['foto_pengaduan'] = $request->file('foto_pengaduan')->store('pengaduan', 'public');
+        }
+
+        LaporanPengaduan::create($data);
 
         return redirect()
             ->route('siswa.dashboard')

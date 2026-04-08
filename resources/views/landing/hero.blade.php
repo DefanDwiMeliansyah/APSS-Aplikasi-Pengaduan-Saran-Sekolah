@@ -170,11 +170,11 @@
 
                 <div class="hero__cta">
                     @guest('siswa')
-                        <a href="{{ route('siswa.register') }}" class="btn-teal">
+                        <a href="{{ route('siswa.login') }}" class="btn-teal">
                             Mulai Melapor
                         </a>
-                        <a href="{{ route('siswa.login') }}" class="btn-outline-teal">
-                            Sudah punya akun?
+                        <a href="{{ route('admin.login') }}" class="btn-outline-teal">
+                            Kelola Laporan
                         </a>
                     @else
                         <a href="{{ route('siswa.laporan.create') }}" class="btn-teal">

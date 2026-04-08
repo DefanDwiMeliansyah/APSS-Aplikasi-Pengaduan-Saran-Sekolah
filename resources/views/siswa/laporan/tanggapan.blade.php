@@ -27,6 +27,14 @@
         </div>
     @endif
 
+    {{-- Foto Balasan --}}
+    @if ($laporan->aspirasi?->foto_tanggapan)
+    <div class="detail-item__label">Foto Balasan</div>
+        <div style="margin-top:.875rem;">
+            <img src="{{ asset('storage/' . $laporan->aspirasi->foto_tanggapan) }}" alt="Foto Balasan Admin" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:cover;">
+        </div>
+    @endif
+
     {{-- Tombol Hapus --}}
     <form action="{{ route('siswa.laporan.destroy', $laporan->id) }}"
           method="POST" style="display:inline;margin-left:.75rem;"

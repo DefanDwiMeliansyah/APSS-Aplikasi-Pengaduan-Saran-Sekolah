@@ -16,6 +16,7 @@ class Aspirasi extends Model
         'status',
         'pesan',
         'feedback',
+        'foto_tanggapan',
     ];
 
     public function laporan()

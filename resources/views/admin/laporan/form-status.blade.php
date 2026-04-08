@@ -3,7 +3,7 @@
         <h2 class="panel-card__title">Update Status</h2>
     </div>
     <div class="panel-card__body">
-        <form action="{{ route('admin.laporan.update', $laporan->id) }}" method="POST">
+        <form action="{{ route('admin.laporan.update', $laporan->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -29,6 +29,15 @@
                     style="resize:vertical;"
                     maxlength="500">{{ $laporan->aspirasi?->pesan }}</textarea>
                 @error('pesan')
+                    <div style="font-size:.78rem;color:#dc2626;margin-top:.3rem;">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div style="margin-bottom:1.5rem;">
+                <label class="admin-label">Foto Balasan (Opsional)</label>
+                <input type="file" name="foto_tanggapan" accept="image/jpeg,image/png,image/jpg" style="display:block;width:100%;padding:0.5rem;border:1px solid var(--gray-200);border-radius:0.375rem;font-size:0.875rem;">
+                <small style="color:var(--gray-500);font-size:0.75rem;margin-top:0.25rem;display:block;">Maksimal 2MB (JPG, JPEG, PNG)</small>
+                @error('foto_tanggapan')
                     <div style="font-size:.78rem;color:#dc2626;margin-top:.3rem;">{{ $message }}</div>
                 @enderror
             </div>

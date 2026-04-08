@@ -65,10 +65,10 @@
                 </a>
             @else
                 <a href="{{ route('siswa.login') }}" class="btn-outline-teal" style="padding:.5rem 1.25rem;font-size:.875rem;">
-                    Masuk
+                    Masuk Siswa
                 </a>
-                <a href="{{ route('siswa.register') }}" class="btn-teal" style="padding:.5rem 1.25rem;font-size:.875rem;">
-                    Daftar
+                <a href="{{ route('admin.login') }}" class="btn-teal" style="padding:.5rem 1.25rem;font-size:.875rem;">
+                    Masuk Admin
                 </a>
             @endauth
         </div>

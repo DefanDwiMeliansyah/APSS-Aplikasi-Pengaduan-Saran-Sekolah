@@ -113,17 +113,24 @@ class LaporanAspirasiController extends Controller
         $request->validate([
             'status' => 'required|in:proses,selesai',
             'pesan'  => 'nullable|string|max:500',
+            'foto_tanggapan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $data = [
+            'admin_id' => Auth::guard('admin')->id(),
+            'status'   => $request->status,
+            'pesan'    => $request->pesan,
+        ];
+
+        if ($request->hasFile('foto_tanggapan')) {
+            $data['foto_tanggapan'] = $request->file('foto_tanggapan')->store('tanggapan', 'public');
+        }
 
         Aspirasi::updateOrCreate(
             [
                 'laporan_id' => $laporan->id,
             ],
-            [
-                'admin_id' => Auth::guard('admin')->id(),
-                'status'   => $request->status,
-                'pesan'    => $request->pesan,
-            ]
+            $data
         );
 
         return redirect()
