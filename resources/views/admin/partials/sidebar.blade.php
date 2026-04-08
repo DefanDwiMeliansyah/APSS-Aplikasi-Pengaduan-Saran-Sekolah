@@ -30,6 +30,12 @@
             Kategori
         </a>
 
+        <a href="{{ route('admin.siswa.index') }}"
+           class="sidebar-link {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
+            <i class="bi bi-people"></i>
+            Data Siswa
+        </a>
+
         <div class="sidebar-section-label" style="margin-top:.75rem;">Akun</div>
 
         <a href="{{ route('admin.akun') }}"

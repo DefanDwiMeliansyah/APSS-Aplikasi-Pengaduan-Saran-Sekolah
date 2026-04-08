@@ -18,7 +18,12 @@
             </td>
             <td style="font-weight:500;">{{ $item->siswa->nama ?? '-' }}</td>
             <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
-            <td style="color:var(--gray-500);max-width:220px;">{{ Str::limit($item->ket, 50) }}</td>
+            <td style="color:var(--gray-500);max-width:220px;">
+                <div style="font-size:.75rem;color:var(--gray-400);margin-bottom:.2rem;">
+                    <i class="bi bi-clock"></i> {{ $item->created_at->format('d M Y H:i') }} WIB
+                </div>
+                {{ Str::limit($item->ket, 50) }}
+            </td>
             <td>
                 @php
                     $st = $item->status ?? 'belum';

@@ -94,7 +94,39 @@
         @enderror
     </div>
 
-    <button type="submit" class="auth-btn">
+    {{-- Password --}}
+    <div class="auth-field" style="margin-top:1.25rem;">
+        <label for="password">Password</label>
+        <div class="field-wrap">
+            <i class="bi bi-lock field-icon"></i>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Buat password (min. 6 karakter)"
+                class="{{ $errors->has('password') ? 'is-invalid' : '' }}"
+                autocomplete="new-password">
+        </div>
+        @error('password')
+            <div class="field-error">{{ $message }}</div>
+        @enderror
+    </div>
+
+    {{-- Konfirmasi Password --}}
+    <div class="auth-field" style="margin-top:1.25rem;">
+        <label for="password_confirmation">Konfirmasi Password</label>
+        <div class="field-wrap">
+            <i class="bi bi-lock-fill field-icon"></i>
+            <input
+                type="password"
+                id="password_confirmation"
+                name="password_confirmation"
+                placeholder="Ulangi password"
+                autocomplete="new-password">
+        </div>
+    </div>
+
+    <button type="submit" class="auth-btn" style="margin-top:1.5rem;">
         Buat Akun
     </button>
 </form>

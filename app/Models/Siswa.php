@@ -16,11 +16,25 @@ class Siswa extends Authenticatable
         'nis',
         'nama',
         'kelas',
+        'password',
     ];
 
     protected $hidden = [
+        'password',
         'remember_me',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 
     protected function nama(): Attribute
     {

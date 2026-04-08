@@ -63,7 +63,25 @@
         @enderror
     </div>
 
-    <button type="submit" class="auth-btn">
+    {{-- Password --}}
+    <div class="auth-field" style="margin-top:1.25rem;">
+        <label for="password">Password</label>
+        <div class="field-wrap">
+            <i class="bi bi-lock field-icon"></i>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Masukkan password kamu"
+                class="{{ $errors->has('password') ? 'is-invalid' : '' }}"
+                autocomplete="current-password">
+        </div>
+        @error('password')
+            <div class="field-error">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <button type="submit" class="auth-btn" style="margin-top:1.5rem;">
         Masuk
     </button>
 </form>

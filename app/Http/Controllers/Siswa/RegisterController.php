@@ -22,12 +22,14 @@ class RegisterController extends Controller
             'nis' => 'required|unique:siswas,nis',
             'nama' => 'required',
             'kelas' => 'required',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         $siswa = Siswa::create([
             'nis' => $request->nis,
             'nama' => $request->nama,
             'kelas' => $request->kelas,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
         ]);
 
         Auth::guard('siswa')->login($siswa);

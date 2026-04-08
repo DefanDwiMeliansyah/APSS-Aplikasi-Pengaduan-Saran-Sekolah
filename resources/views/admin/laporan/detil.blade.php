@@ -19,6 +19,7 @@
                     ['label' => 'NIS',        'value' => $laporan->siswa->nis],
                     ['label' => 'Kelas',      'value' => $laporan->siswa->kelas],
                     ['label' => 'Kategori',   'value' => $laporan->kategori->nama_kategori],
+                    ['label' => 'Waktu Lapor','value' => $laporan->created_at->format('d M Y H:i') . ' WIB'],
                     ['label' => 'Lokasi',     'value' => $laporan->lokasi],
                     ['label' => 'Laporan',    'value' => $laporan->ket],
                 ];

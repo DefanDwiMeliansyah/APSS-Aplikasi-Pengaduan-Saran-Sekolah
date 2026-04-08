@@ -18,20 +18,17 @@ class AuthController extends Controller
     {
         $request->validate([
             'nis' => 'required',
+            'password' => 'required',
         ]);
 
-        $siswa = Siswa::where('nis', $request->nis)->first();
-
-        if (!$siswa) {
-            return redirect()
-                ->route('siswa.register')
-                ->with('nis', $request->nis);
+        if (Auth::guard('siswa')->attempt(['nis' => $request->nis, 'password' => $request->password])) {
+            $request->session()->regenerate();
+            return redirect()->route('siswa.dashboard');
         }
 
-        Auth::guard('siswa')->login($siswa);
-        $request->session()->regenerate();
-
-        return redirect()->route('siswa.dashboard');
+        return back()->withErrors([
+            'auth' => 'NIS atau Password salah.',
+        ])->onlyInput('nis');
     }
 
     public function logout(Request $request)

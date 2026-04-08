@@ -37,8 +37,8 @@
                     <div class="detail-item__value">{{ $laporan->ket }}</div>
                 </div>
                 <div class="detail-item">
-                    <div class="detail-item__label">Tanggal Laporan</div>
-                    <div class="detail-item__value">{{ $laporan->created_at->format('d M Y') }}</div>
+                    <div class="detail-item__label">Tanggal & Waktu Laporan</div>
+                    <div class="detail-item__value">{{ $laporan->created_at->format('d M Y H:i') }} WIB</div>
                 </div>
             </div>
 
