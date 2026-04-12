@@ -7,7 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class LaporanPengaduan extends Model
 {
-    /** @use HasFactory<\Database\Factories\LaporanPengaduanFactory> */
+/**
+ * @property \App\Models\Siswa $siswa
+ * @property \App\Models\Kategori|null $kategori
+ * @property \App\Models\Aspirasi|null $aspirasi
+ * @use HasFactory<\Database\Factories\LaporanPengaduanFactory>
+ */
     use HasFactory;
 
     protected $fillable = [

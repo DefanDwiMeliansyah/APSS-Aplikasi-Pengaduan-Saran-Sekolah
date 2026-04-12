@@ -26,12 +26,20 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        $laporanTrending = LaporanPengaduan::select('kategori_id', 'lokasi', \Illuminate\Support\Facades\DB::raw('COUNT(*) as total'))
+            ->with('kategori')
+            ->groupBy('kategori_id', 'lokasi')
+            ->orderByDesc('total')
+            ->take(5)
+            ->get();
+
         return view('admin.dashboard', compact(
             'totalSiswa',
             'totalLaporan',
             'laporanProses',
             'laporanSelesai',
-            'laporanTerbaru'
+            'laporanTerbaru',
+            'laporanTrending'
         ));
     }
 }

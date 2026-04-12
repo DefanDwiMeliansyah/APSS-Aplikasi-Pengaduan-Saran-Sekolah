@@ -56,7 +56,15 @@
     </div>
 </div>
 
-{{-- Tabel laporan terbaru --}}
-@include('admin.list-laporan')
+<div class="row g-4">
+    <div class="col-lg-7">
+        {{-- Tabel laporan terbaru --}}
+        @include('admin.list-laporan')
+    </div>
+    <div class="col-lg-5">
+        {{-- Laporan Trending --}}
+        @include('admin.list-trending')
+    </div>
+</div>
 
 @endsection
