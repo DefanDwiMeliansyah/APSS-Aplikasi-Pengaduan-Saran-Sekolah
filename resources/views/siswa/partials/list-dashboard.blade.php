@@ -20,7 +20,7 @@
                 <div style="font-size:.75rem;color:var(--gray-400);">
                     {{ $item->created_at->format('d M Y H:i') }} WIB
                     &middot; {{ $item->kategori->nama_kategori ?? '-' }}
-                    &middot; {{ $item->lokasi }}
+                    &middot; {{ $item->lokasi->nama_lokasi ?? '-' }}
                     @if($item->feedback)
                         &middot; Feedback: {{ $item->feedback }}
                     @endif

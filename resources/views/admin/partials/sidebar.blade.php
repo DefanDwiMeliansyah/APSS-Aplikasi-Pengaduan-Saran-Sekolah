@@ -30,6 +30,12 @@
             Kategori
         </a>
 
+        <a href="{{ route('admin.lokasi.index') }}"
+           class="sidebar-link {{ request()->routeIs('admin.lokasi.*') ? 'active' : '' }}">
+            <i class="bi bi-geo-alt"></i>
+            Lokasi
+        </a>
+
         <a href="{{ route('admin.siswa.index') }}"
            class="sidebar-link {{ request()->routeIs('admin.siswa.*') ? 'active' : '' }}">
             <i class="bi bi-people"></i>

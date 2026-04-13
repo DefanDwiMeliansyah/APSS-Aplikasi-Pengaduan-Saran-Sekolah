@@ -19,7 +19,7 @@ class LaporanPengaduan extends Model
         'siswa_id',
         'kategori_id',
         'ket',
-        'lokasi',
+        'lokasi_id',
         'foto_pengaduan',
     ];
 
@@ -31,6 +31,11 @@ class LaporanPengaduan extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class);
     }
 
     public function aspirasi()

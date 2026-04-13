@@ -15,7 +15,7 @@ class LaporanAspirasiController extends Controller
      */
     public function index(Request $request)
     {
-        $query = LaporanPengaduan::with(['kategori', 'aspirasi'])
+        $query = LaporanPengaduan::with(['kategori', 'aspirasi', 'lokasi'])
             ->latest();
 
         if ($request->filled('status')) {
@@ -78,7 +78,7 @@ class LaporanAspirasiController extends Controller
      */
     public function show(LaporanPengaduan $laporan)
     {
-        $laporan->load(['kategori', 'aspirasi']);
+        $laporan->load(['kategori', 'aspirasi', 'lokasi']);
 
         $kepuasan = [
             1 => 'Tidak Puas',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Aspirasi;
 use App\Models\Kategori;
 use App\Models\LaporanPengaduan;
+use App\Models\Lokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,8 +26,9 @@ class LaporanPengaduanController extends Controller
     public function create()
     {
         $kategori = Kategori::all();
+        $lokasi = Lokasi::all();
 
-        return view('siswa.laporan.create', compact('kategori'));
+        return view('siswa.laporan.create', compact('kategori', 'lokasi'));
     }
 
     /**
@@ -37,7 +39,7 @@ class LaporanPengaduanController extends Controller
         $request->validate([
             'kategori_id' => 'required|exists:kategoris,id',
             'ket' => 'required|string',
-            'lokasi' => 'required|string|max:255',
+            'lokasi_id' => 'required|exists:lokasis,id',
             'foto_pengaduan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -45,7 +47,7 @@ class LaporanPengaduanController extends Controller
             'siswa_id' => Auth::guard('siswa')->user()->id,
             'kategori_id' => $request->kategori_id,
             'ket' => $request->ket,
-            'lokasi' => $request->lokasi,
+            'lokasi_id' => $request->lokasi_id,
         ];
 
         if ($request->hasFile('foto_pengaduan')) {
@@ -64,7 +66,7 @@ class LaporanPengaduanController extends Controller
      */
     public function show(LaporanPengaduan $laporan)
     {
-        $laporan->load('siswa', 'aspirasi', 'kategori');
+        $laporan->load('siswa', 'aspirasi', 'kategori', 'lokasi');
 
         return view('siswa.laporan.show', [
             'laporan' => $laporan

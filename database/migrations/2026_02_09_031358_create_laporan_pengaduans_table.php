@@ -20,7 +20,9 @@ return new class extends Migration
                 ->constrained('kategoris')
                 ->cascadeOnDelete();
             $table->text('ket');
-            $table->string('lokasi');
+            $table->foreignId('lokasi_id')
+                ->constrained('lokasis')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

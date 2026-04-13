@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Kategori;
+use App\Models\Lokasi;
 use App\Models\Siswa;
 
 /**
@@ -21,14 +22,9 @@ class LaporanPengaduanFactory extends Factory
         return [
             'siswa_id' => Siswa::factory(),
             'kategori_id' => Kategori::factory(),
+            'lokasi_id' => Lokasi::factory(),
             'ket' => $this->faker->sentence(12),
-            'lokasi' => $this->faker->randomElement([
-                'Ruang Kelas',
-                'Laboratorium',
-                'Perpustakaan',
-                'Toilet',
-                'Lapangan',
-            ]),
         ];
     }
 }
+

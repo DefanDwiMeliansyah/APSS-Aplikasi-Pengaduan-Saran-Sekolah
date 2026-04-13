@@ -26,9 +26,9 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        $laporanTrending = LaporanPengaduan::select('kategori_id', 'lokasi', \Illuminate\Support\Facades\DB::raw('COUNT(*) as total'))
-            ->with('kategori')
-            ->groupBy('kategori_id', 'lokasi')
+        $laporanTrending = LaporanPengaduan::select('kategori_id', 'lokasi_id', \Illuminate\Support\Facades\DB::raw('COUNT(*) as total'))
+            ->with('kategori', 'lokasi')
+            ->groupBy('kategori_id', 'lokasi_id')
             ->orderByDesc('total')
             ->take(5)
             ->get();

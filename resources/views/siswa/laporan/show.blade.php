@@ -30,7 +30,7 @@
                 </div>
                 <div class="detail-item">
                     <div class="detail-item__label">Lokasi Kejadian</div>
-                    <div class="detail-item__value">{{ $laporan->lokasi }}</div>
+                    <div class="detail-item__value">{{ $laporan->lokasi->nama_lokasi ?? '-' }}</div>
                 </div>
                 <div class="detail-item">
                     <div class="detail-item__label">Keterangan</div>

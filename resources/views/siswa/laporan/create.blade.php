@@ -14,15 +14,17 @@
                 {{-- Kategori --}}
                 <div style="margin-bottom:1rem;">
                     <label class="siswa-label">Kategori</label>
-                    <x-select label="Kategori" name="kategori_id"
-                        :options="$kategori" label-field="nama_kategori" />
+                    <x-searchable-select name="kategori_id"
+                        :options="$kategori" label-field="nama_kategori"
+                        placeholder="Ketik untuk mencari kategori..." />
                 </div>
 
                 {{-- Lokasi --}}
                 <div style="margin-bottom:1rem;">
                     <label class="siswa-label">Lokasi Kejadian</label>
-                    <x-input label="Lokasi Kejadian" name="lokasi"
-                        placeholder="Contoh: Ruang Kelas X RPL A" />
+                    <x-searchable-select name="lokasi_id"
+                        :options="$lokasi" label-field="nama_lokasi"
+                        placeholder="Ketik untuk mencari lokasi..." />
                 </div>
 
                 {{-- Keterangan --}}

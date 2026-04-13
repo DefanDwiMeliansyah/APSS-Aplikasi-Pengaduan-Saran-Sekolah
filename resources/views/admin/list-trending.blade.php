@@ -13,7 +13,7 @@
                             {{ $trending->kategori->nama_kategori ?? '-' }}
                         </div>
                         <div style="font-size: .85rem; color: var(--gray-500);">
-                            <i class="bi bi-geo-alt" style="margin-right: 0.2rem;"></i> {{ $trending->lokasi }}
+                            <i class="bi bi-geo-alt" style="margin-right: 0.2rem;"></i> {{ $trending->lokasi->nama_lokasi ?? '-' }}
                         </div>
                     </div>
                     <div>
